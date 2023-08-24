@@ -1,4 +1,6 @@
 if __name__ == "__main__":
+    
+    """
     N, M = map(int, input().split())
     board = [[0] * M for _ in range(N)]
 
@@ -35,3 +37,16 @@ if __name__ == "__main__":
     overall_min = min(white_min, black_min)
 
     print(overall_min)
+"""
+
+    # boj.kr/2841
+    input = sys.stdin.readline
+    pq = []
+
+    N, P = map(int, input().split())
+    print(f"N : {N}     P : {P}")
+    print()
+
+    for _ in range(N):
+        String, Fret = map(int, input().split())
+        print(f"String : {String},   Fret : {Fret}")
