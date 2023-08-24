@@ -40,6 +40,8 @@ if __name__ == "__main__":
 """
 
     # boj.kr/2841
+    import sys
+    
     input = sys.stdin.readline
     pq = []
 
