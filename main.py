@@ -40,17 +40,17 @@ if __name__ == "__main__":
 """
 
     # boj.kr/2841 
+    import sys
     import heapq as hq
+    
+    input = sys.stdin.readline
 
     pq = [[] for _ in range(500_000)]
-
     N, P = map(int, input().split())
-
     ans = 0
 
     for _ in range(N):
         String, Fret = map(int, input().split())    
-        print(f"String : {String},   Fret : {Fret}") 
         
         for _ in range(len(pq[String-1])) :
             if -Fret > min(pq[String-1]):
@@ -61,5 +61,5 @@ if __name__ == "__main__":
             hq.heappush(pq[String-1], -Fret)
             ans += 1    
                 
-    print(ans)      
+    print(ans)          
  
