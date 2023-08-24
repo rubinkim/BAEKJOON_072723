@@ -39,14 +39,12 @@ if __name__ == "__main__":
     print(overall_min)
 """
 
-    # boj.kr/2841
+    # boj.kr/2841 
     import heapq as hq
 
     pq = [[] for _ in range(500_000)]
 
     N, P = map(int, input().split())
-    print(f"N : {N}     P : {P}")
-    print()
 
     ans = 0
 
@@ -61,8 +59,7 @@ if __name__ == "__main__":
         
         if -Fret not in pq[String-1]:    
             hq.heappush(pq[String-1], -Fret)
-            ans += 1
-        
-        print(f"pq[{String-1}] : {pq[String-1]},   ans : {ans}")
-            
-print(ans)    
+            ans += 1    
+                
+    print(ans)      
+ 
