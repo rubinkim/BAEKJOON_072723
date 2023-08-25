@@ -1,5 +1,6 @@
 if __name__ == "__main__":
     
+    #boj.kr/4796
     for i in range(3):    
         L, P, V = map(int, input().split())
         if i < 2:
@@ -8,6 +9,7 @@ if __name__ == "__main__":
             print(f"Case {i+1}: {total_use}")
     
     """
+    # boj.kr/1018
     N, M = map(int, input().split())
     board = [[0] * M for _ in range(N)]
 
@@ -45,6 +47,7 @@ if __name__ == "__main__":
 
     print(overall_min)
     """
+    
     """
     # boj.kr/2841 
     import sys
