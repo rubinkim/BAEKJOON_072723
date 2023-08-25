@@ -37,9 +37,9 @@ if __name__ == "__main__":
     overall_min = min(white_min, black_min)
 
     print(overall_min)
-"""
+    """
 
-"""
+    """
     # boj.kr/2841 
     import sys
     import heapq as hq
@@ -63,7 +63,7 @@ if __name__ == "__main__":
             ans += 1    
                 
     print(ans)          
-"""
+    """
 
     for i in range(3):    
         L, P, V = map(int, input().split())
