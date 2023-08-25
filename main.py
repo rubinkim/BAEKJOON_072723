@@ -39,6 +39,7 @@ if __name__ == "__main__":
     print(overall_min)
 """
 
+"""
     # boj.kr/2841 
     import sys
     import heapq as hq
@@ -62,4 +63,11 @@ if __name__ == "__main__":
             ans += 1    
                 
     print(ans)          
- 
+"""
+
+    for i in range(3):    
+        L, P, V = map(int, input().split())
+        if i < 2:
+            full_use, incomplete_use = (V // P) * L, V % P
+            total_use = full_use + incomplete_use
+            print(f"Case {i+1}: {total_use}")
