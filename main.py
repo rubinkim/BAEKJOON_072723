@@ -45,7 +45,6 @@ if __name__ == "__main__":
 
     print(overall_min)
     """
-
     """
     # boj.kr/2841 
     import sys
