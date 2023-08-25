@@ -1,5 +1,12 @@
 if __name__ == "__main__":
     
+    for i in range(3):    
+        L, P, V = map(int, input().split())
+        if i < 2:
+            full_use, incomplete_use = (V // P) * L, V % P
+            total_use = full_use + incomplete_use
+            print(f"Case {i+1}: {total_use}")
+    
     """
     N, M = map(int, input().split())
     board = [[0] * M for _ in range(N)]
@@ -65,9 +72,3 @@ if __name__ == "__main__":
     print(ans)          
     """
 
-    for i in range(3):    
-        L, P, V = map(int, input().split())
-        if i < 2:
-            full_use, incomplete_use = (V // P) * L, V % P
-            total_use = full_use + incomplete_use
-            print(f"Case {i+1}: {total_use}")
