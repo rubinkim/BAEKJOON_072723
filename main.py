@@ -31,14 +31,14 @@ if __name__ == "__main__":
         for ck, cv in chicken_dict.items():
             #print(f"house_coord : {hv},  chicken_coord : {cv}")
             dist.append((ck, measure_dist(hv, cv)))
-        print(dist)    
+           
         dist = sorted(dist, key=lambda x : x[1])
         min_dist = dist[0]
         chicken_dist_dict[hk] = min_dist
 
     ans = 0    
     for k, v in chicken_dist_dict.items():
-        ans += v
+        ans += v[1]
         
     print(ans)   
                   
