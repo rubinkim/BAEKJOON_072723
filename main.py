@@ -22,9 +22,8 @@ if __name__ == "__main__":
     for i in range(N):
         for j in range(N):
             if city[i][j] == 1:
-                house_dict['house_' + str(i) + str(j)] = (i, j)
-                
-    # 치킨거리 구하기(chicken_dist_dict)
+                house_dict['house_' + str(i) + str(j)] = (i, j)                
+    
     chicken_dist_dict = {}
 
     for hk, hv in house_dict.items():
