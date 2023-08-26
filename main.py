@@ -1,17 +1,16 @@
 if __name__ == "__main__":
     
     #boj.kr/15686
+    from itertools import combinations
+
     N, M = map(int, input().split())  # (5, 2)
     city = [[0] * N for _ in range(N)]
 
     for i in range(N):
+
         for j, cell in enumerate(map(int, input().split())):
             city[i][j] = cell
-            
-    def measure_dist(tuple1, tuple2):
-        dist = abs(tuple1[0] - tuple2[0]) + abs(tuple1[1] - tuple2[1])
-        return dist
-
+        
     chicken_dict = {}
     for i in range(N):
         for j in range(N):
@@ -22,25 +21,31 @@ if __name__ == "__main__":
     for i in range(N):
         for j in range(N):
             if city[i][j] == 1:
-                house_dict['house_' + str(i) + str(j)] = (i, j)                
-    
-    chicken_dist_dict = {}
+                house_dict['house_' + str(i) + str(j)] = (i, j)
+                
+    def measure_dist(tuple1, tuple2):
+        dist = abs(tuple1[0] - tuple2[0]) + abs(tuple1[1] - tuple2[1])
+        return dist
+                
+    city_distances = []
 
-    for hk, hv in house_dict.items():
-        dist = []
-        for ck, cv in chicken_dict.items():
-            #print(f"house_coord : {hv},  chicken_coord : {cv}")
-            dist.append((ck, measure_dist(hv, cv)))
-           
-        dist = sorted(dist, key=lambda x : x[1])
-        min_dist = dist[0]
-        chicken_dist_dict[hk] = min_dist
-
-    ans = 0    
-    for k, v in chicken_dist_dict.items():
-        ans += v[1]
+    for num_ch in range(1, M+1):    
+        for c in combinations(chicken_dict.items(), num_ch):
+            dist = 0
+            for name, coord in house_dict.items():
+                cc_list = []
+                
+                for i in range(len(c)):                
+                    cc_dist = measure_dist(c[i][1], coord)                
+                    cc_list.append(cc_dist)
+                min_cc_dist = min(cc_list)        
+                
+                dist += min_cc_dist
+            city_distances.append(dist)        
+            
+        min_city_distance = min(city_distances)
         
-    print(ans)   
+    print(min_city_distance)             
                   
     """
     #boj.kr/4796
