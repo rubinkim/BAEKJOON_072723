@@ -1,5 +1,53 @@
 if __name__ == "__main__":
     
+    # boj.kr/1389
+    from collections import deque
+
+    N, M = map(int, input().split())
+    relations_matrix = [[0] * N for _ in range(N)]
+
+    for _ in range(M):
+        start, end = map(int, input().split())
+        relations_matrix[start-1][end-1] = 1
+        relations_matrix[end-1][start-1] = 1
+        
+    friends_dict = {}
+
+    for i in range(N):
+        friends_list =  []
+        for j in range(N):
+            if relations_matrix[i][j] == 1:
+                friends_list.append((j))
+        friends_dict[i] = friends_list    
+
+    def bfs(start, end):
+        chk = [[False] * N for _ in range(N)]
+        chk[start][0] = chk[0][start] = True
+        
+        dq = deque()
+        dq.append((start, 0))   
+        
+        while dq:
+            y, d = dq.popleft()
+            if end == y:
+                return d        
+            nd = d + 1        
+            for v in friends_dict[y]:            
+                dq.append((v, nd))
+                
+    kevin = []
+
+    for i in range(5):
+        sum = 0
+        for j in range(5):
+            if j == i:
+                continue
+            sum += bfs(i, j)
+        kevin.append(sum)    
+
+    print(kevin.index(min(kevin)) + 1)
+    
+    """   
     #boj.kr/15686
     from itertools import combinations
 
@@ -45,7 +93,8 @@ if __name__ == "__main__":
             
         min_city_distance = min(city_distances)
         
-    print(min_city_distance)             
+    print(min_city_distance) 
+    """            
                   
     """
     #boj.kr/4796
