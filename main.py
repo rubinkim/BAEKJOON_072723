@@ -1,5 +1,45 @@
 if __name__ == "__main__":
     
+    # boj.kr/1915
+    import sys
+
+    input = sys.stdin.readline
+    n, m = map(int, input().split())
+    print(f"n : {n},   m : {m}")
+    
+    rectangle = [[0] * m for _ in range(n)]
+    for i in range(n):
+        rectangle[i] = [int(x) for x in input().strip("\n")]
+        
+    print(f"length of rectangle : {len(rectangle)},  width of rectangle : {len(rectangle[0])}")
+    for row in rectangle:
+        print(row)
+        
+    def draw_rectangle(Rectangle):
+        n = len(rectangle)
+        m = len(rectangle[0])
+        
+        if n >= m:
+            for w in range(m, 0, -1):
+                for i in range(n - w + 1):
+                    for j in range(m - w + 1):                    
+                        area = [x[j : j + w] for x in rectangle[i : i + w]]                    
+                        if sum([sum(k) for k in area]) == w ** 2: 
+                            print (f"m : {m},  w : {w}, area_length : {len(area)},  area_width : {len(area[0])},   i : {i},  j : {j} ---> {w ** 2}")                       
+                            return w ** 2                                
+                    
+        else:
+            for w in range(n, 0, -1):
+                for i in range(n - w + 1):
+                    for j in range(m - w + 1):
+                        area = [x[j : j + w] for x in rectangle[i : i + w]]                    
+                        if sum([sum(k) for k in area]) == w ** 2: 
+                            print (f"n : {n},  w : {w}, area_length : {len(area)},  area_width : {len(area[0])},  i : {i},   j : {j} ---> {w ** 2}")                       
+                            return w ** 2   
+                        
+    print(draw_rectangle(rectangle))                 
+
+    """    
     # boj.kr/1389
     from collections import deque
 
@@ -45,6 +85,7 @@ if __name__ == "__main__":
             ans = (i, v)
             
     print(ans[0] + 1)
+    """
     
     """   
     #boj.kr/15686
