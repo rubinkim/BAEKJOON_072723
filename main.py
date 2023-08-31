@@ -1,43 +1,29 @@
 if __name__ == "__main__":
     
     # boj.kr/1915
-    import sys
-
-    input = sys.stdin.readline
     n, m = map(int, input().split())
-    print(f"n : {n},   m : {m}")
-    
-    rectangle = [[0] * m for _ in range(n)]
+
+    arr = [input() for _ in range(n)]
+    dp = [[0] * m for _ in range(n)]
+
+    for i in range(m):
+        if arr[0][i] == "1":
+            dp[0][i] = 1
+            
     for i in range(n):
-        rectangle[i] = [int(x) for x in input().strip("\n")]
-        
-    print(f"length of rectangle : {len(rectangle)},  width of rectangle : {len(rectangle[0])}")
-    for row in rectangle:
-        print(row)
-        
-    def draw_rectangle(Rectangle):
-        n = len(rectangle)
-        m = len(rectangle[0])
-        
-        if n >= m:
-            for w in range(m, 0, -1):
-                for i in range(n - w + 1):
-                    for j in range(m - w + 1):                    
-                        area = [x[j : j + w] for x in rectangle[i : i + w]]                    
-                        if sum([sum(k) for k in area]) == w ** 2: 
-                            print (f"m : {m},  w : {w}, area_length : {len(area)},  area_width : {len(area[0])},   i : {i},  j : {j} ---> {w ** 2}")                       
-                            return w ** 2                                
+        for j in range(m):
+            if arr[i][0] == "1":
+                dp[i][0] = 1
+            for j in range(m):
+                if arr[i][j] == "1":
+                    dp[i][j] = min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]) + 1
                     
-        else:
-            for w in range(n, 0, -1):
-                for i in range(n - w + 1):
-                    for j in range(m - w + 1):
-                        area = [x[j : j + w] for x in rectangle[i : i + w]]                    
-                        if sum([sum(k) for k in area]) == w ** 2: 
-                            print (f"n : {n},  w : {w}, area_length : {len(area)},  area_width : {len(area[0])},  i : {i},   j : {j} ---> {w ** 2}")                       
-                            return w ** 2   
-                        
-    print(draw_rectangle(rectangle))                 
+    ans = 0
+    for i in range(n):
+        for j in range(m):
+            ans = max(ans, dp[i][j])
+
+    print(ans ** 2)                
 
     """    
     # boj.kr/1389
