@@ -1,5 +1,50 @@
 if __name__ == "__main__":
     
+    # boj.kr/17136
+    
+    arr = [input().split() for _ in range(10)]
+    dp = [[[0, i, j, False] for j in range(len(arr[0]))] for i in range(10)]
+
+    for i in range(len(arr[0])):
+        if arr[0][i] == "1":
+            dp[0][i][0] = 1
+
+    for i in range(1, 10):
+        if arr[i][0] == "1":
+            dp[i][0][0] = 1
+        for j in range(1, len(arr[0])):
+            if arr[i][j] == "1":
+                dp[i][j][0] = min(dp[i][j-1][0], dp[i-1][j][0], dp[i-1][j-1][0]) + 1
+
+    size = 5
+
+    while size >=1:
+        for i in range(10):
+            for j in range(len(dp[0])):
+                sum = 0            
+                if dp[i][j][0] == size:                
+                    for k in range(size-1, -1, -1):
+                        for l in range(size-1, -1, -1):
+                            if not dp[i-k][j-k][3]:
+                                sum += 1                                             
+                                        
+                if sum == size ** 2:                              
+                    for k in range(size-1, -1, -1):
+                        for l in range(size-1, -1, -1):
+                            dp[i-k][j-l][3] = True                            
+                            if not(k==0 and l==0) :                      
+                                dp[i-k][j-l][0] = 0
+        size -= 1
+        
+    sum = 0
+    for i in range(len(dp)):
+        for j in range(len(dp[i])):
+            if dp[i][j][0] != 0:
+                sum += 1
+            
+    print(sum)      
+    
+    """
     # boj.kr/1915
     n, m = map(int, input().split())
 
@@ -22,7 +67,8 @@ if __name__ == "__main__":
         for j in range(m):
             ans = max(ans, dp[i][j])
 
-    print(ans ** 2)    
+    print(ans ** 2)
+    """    
 
     """    
     # boj.kr/1389
