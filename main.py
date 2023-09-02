@@ -22,12 +22,12 @@ if __name__ == "__main__":
 
     while size >=1:
         for i in range(10):
-            for j in range(len(dp_new[0])):
+            for j in range(len(dp[0])):
                 sum = 0            
-                if dp_new[i][j][0] == size:                
+                if dp[i][j][0] == size:                
                     for k in range(size-1, -1, -1):
                         for l in range(size-1, -1, -1):
-                            if not dp_new[i-k][j-k][3]:
+                            if not dp[i-k][j-k][3]:
                                 sum += 1 
                                 #print(f"size : {size},  i-k : {i-k},  j-l : {j-l},  {dp_new[i-k][j-l][3]}")
                         #print()            
@@ -42,17 +42,17 @@ if __name__ == "__main__":
                         #print(f"sum : {sum}, i : {i},  j :{j}")                
                         for k in range(size-1, -1, -1):
                             for l in range(size-1, -1, -1):
-                                dp_new[i-k][j-l][3] = True                            
+                                dp[i-k][j-l][3] = True                            
                                 if not(k==0 and l==0) :                      
-                                    dp_new[i-k][j-l][0] = 0              
+                                    dp[i-k][j-l][0] = 0              
                                             
         size -= 1  
         
     sum = 0
     if any([x <= 5 for x in box_dict.values()]):
-        for i in range(len(dp_new)):
-            for j in range(len(dp_new[i])):
-                if dp_new[i][j][0] != 0:
+        for i in range(len(dp)):
+            for j in range(len(dp[i])):
+                if dp[i][j][0] != 0:
                     sum += 1
     else:
         sum = -1
