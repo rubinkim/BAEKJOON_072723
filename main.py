@@ -1,14 +1,13 @@
 if __name__ == "__main__":
     
     # boj.kr/17136
-    
     arr = [input().split() for _ in range(10)]
     dp = [[[0, i, j, False] for j in range(len(arr[0]))] for i in range(10)]
 
     for i in range(len(arr[0])):
         if arr[0][i] == "1":
             dp[0][i][0] = 1
-
+            
     for i in range(1, 10):
         if arr[i][0] == "1":
             dp[i][0][0] = 1
@@ -17,34 +16,48 @@ if __name__ == "__main__":
                 dp[i][j][0] = min(dp[i][j-1][0], dp[i-1][j][0], dp[i-1][j-1][0]) + 1
                 if dp[i][j][0] >= 5:
                     dp[i][j][0] = 5
-
+                    
     size = 5
+    box_dict = {}
 
     while size >=1:
         for i in range(10):
-            for j in range(len(dp[0])):
+            for j in range(len(dp_new[0])):
                 sum = 0            
-                if dp[i][j][0] == size:                
+                if dp_new[i][j][0] == size:                
                     for k in range(size-1, -1, -1):
                         for l in range(size-1, -1, -1):
-                            if not dp[i-k][j-k][3]:
-                                sum += 1                                             
-                                        
-                if sum == size ** 2:                              
-                    for k in range(size-1, -1, -1):
-                        for l in range(size-1, -1, -1):
-                            dp[i-k][j-l][3] = True                            
-                            if not(k==0 and l==0) :                      
-                                dp[i-k][j-l][0] = 0
-        size -= 1
+                            if not dp_new[i-k][j-k][3]:
+                                sum += 1 
+                                #print(f"size : {size},  i-k : {i-k},  j-l : {j-l},  {dp_new[i-k][j-l][3]}")
+                        #print()            
+                                
+                if sum == size ** 2:
+                    if size not in box_dict.keys():
+                        box_dict[size] = 1
+                    else:
+                        box_dict[size] += 1
+                    
+                    if box_dict[size] <= 5:                    
+                        #print(f"sum : {sum}, i : {i},  j :{j}")                
+                        for k in range(size-1, -1, -1):
+                            for l in range(size-1, -1, -1):
+                                dp_new[i-k][j-l][3] = True                            
+                                if not(k==0 and l==0) :                      
+                                    dp_new[i-k][j-l][0] = 0              
+                                            
+        size -= 1  
         
     sum = 0
-    for i in range(len(dp)):
-        for j in range(len(dp[i])):
-            if dp[i][j][0] != 0:
-                sum += 1
+    if any([x <= 5 for x in box_dict.values()]):
+        for i in range(len(dp_new)):
+            for j in range(len(dp_new[i])):
+                if dp_new[i][j][0] != 0:
+                    sum += 1
+    else:
+        sum = -1
             
-    print(sum)      
+    print(sum)              
     
     """
     # boj.kr/1915
