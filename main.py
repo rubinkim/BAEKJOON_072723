@@ -15,6 +15,8 @@ if __name__ == "__main__":
         for j in range(1, len(arr[0])):
             if arr[i][j] == "1":
                 dp[i][j][0] = min(dp[i][j-1][0], dp[i-1][j][0], dp[i-1][j-1][0]) + 1
+                if dp[i][j][0] >= 5:
+                    dp[i][j][0] = 5
 
     size = 5
 
