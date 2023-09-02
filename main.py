@@ -48,16 +48,16 @@ if __name__ == "__main__":
                                             
         size -= 1  
         
-    sum = 0
+    total = 0
     if any([x <= 5 for x in box_dict.values()]):
         for i in range(len(dp)):
             for j in range(len(dp[i])):
                 if dp[i][j][0] != 0:
-                    sum += 1
+                    total += 1
     else:
-        sum = -1
+        total = -1
             
-    print(sum)              
+    print(total)              
     
     """
     # boj.kr/1915
