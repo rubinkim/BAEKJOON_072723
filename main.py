@@ -4,26 +4,36 @@ if __name__ == "__main__":
     arr = [input().split() for _ in range(10)]
     dp = [[[0, i, j, False] for j in range(len(arr[0]))] for i in range(10)]
 
+    for i in range(len(arr[0])):
+        if arr[0][i] == "1":
+            dp[0][i][0] = 1
+            
+    for i in range(1, 10):
+        if arr[i][0] == "1":
+            dp[i][0][0] = 1
+        for j in range(1, len(arr[0])):
+            if arr[i][j] == "1":
+                dp[i][j][0] = min(dp[i][j-1][0], dp[i-1][j][0], dp[i-1][j-1][0]) + 1
+                if dp[i][j][0] >= 5:
+                    dp[i][j][0] = 5
+                    
     size = 5
-
-    while size >= 2:
-        for i in range(10):
-            for j in range(len(dp[0])):
-                if dp[i][j][0] == size and not dp[i][j][3]:
-                    sum = 0
+    for i in range(10):
+        for j in range(len(dp[0])):
+            if dp[i][j][0] == size and not dp[i][j][3]:
+                sum = 0
+                for k in range(size-1, -1, -1):
+                    for l in range(size-1, -1, -1):
+                        if not dp[i-k][j-l][3]:
+                            sum += 1
+                print(f"(i, j) : ({i}, {j}),  sum : {sum}")
+                if sum == size ** 2:
+                    dp[i][j][3] = True
                     for k in range(size-1, -1, -1):
                         for l in range(size-1, -1, -1):
-                            if not dp[i-k][j-l][3]:
-                                sum += 1
-                    #print(f"(i, j) : ({i}, {j}),  sum : {sum}")
-                    if sum == size ** 2:
-                        dp[i][j][3] = True
-                        for k in range(size-1, -1, -1):
-                            for l in range(size-1, -1, -1):
-                                if not(k==0 and l==0):
-                                    dp[i-k][j-l][0] = 0
-        #print(size)
-        size -= 1 
+                            if not(k==0 and l==0):
+                                dp[i-k][j-l][0] = 0  
+
 
     box_dict = {}
     for i in range(10):
@@ -34,7 +44,7 @@ if __name__ == "__main__":
                 else:
                     box_dict[dp[i][j][0]] += 1
                     
-    print(box_dict)
+    print(box_dict)         
                      
     
     """
