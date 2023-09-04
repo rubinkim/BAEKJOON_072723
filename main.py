@@ -18,21 +18,23 @@ if __name__ == "__main__":
                     dp[i][j][0] = 5
                     
     size = 5
-    for i in range(10):
-        for j in range(len(dp[0])):
-            if dp[i][j][0] == size and not dp[i][j][3]:
-                sum = 0
-                for k in range(size-1, -1, -1):
-                    for l in range(size-1, -1, -1):
-                        if not dp[i-k][j-l][3]:
-                            sum += 1
-                print(f"(i, j) : ({i}, {j}),  sum : {sum}")
-                if sum == size ** 2:
-                    dp[i][j][3] = True
+    while size >=1:
+        for i in range(10):
+            for j in range(len(dp[0])):
+                if dp[i][j][0] == size and not dp[i][j][3]:
+                    sum = 0
                     for k in range(size-1, -1, -1):
                         for l in range(size-1, -1, -1):
-                            if not(k==0 and l==0):
-                                dp[i-k][j-l][0] = 0  
+                            if not dp[i-k][j-l][3]:
+                                sum += 1
+                    print(f"(i, j) : ({i}, {j}),  sum : {sum}")
+                    if sum == size ** 2:
+                        dp[i][j][3] = True
+                        for k in range(size-1, -1, -1):
+                            for l in range(size-1, -1, -1):
+                                if not(k==0 and l==0):
+                                    dp[i-k][j-l][0] = 0
+        size -= 1  
 
 
     box_dict = {}
