@@ -6,7 +6,7 @@ if __name__ == "__main__":
 
     size = 5
 
-    while size >= 1:
+    while size >= 2:
         for i in range(10):
             for j in range(len(dp[0])):
                 if dp[i][j][0] == size and not dp[i][j][3]:
@@ -22,6 +22,7 @@ if __name__ == "__main__":
                             for l in range(size-1, -1, -1):
                                 if not(k==0 and l==0):
                                     dp[i-k][j-l][0] = 0
+        #print(size)
         size -= 1 
 
     box_dict = {}
@@ -33,7 +34,7 @@ if __name__ == "__main__":
                 else:
                     box_dict[dp[i][j][0]] += 1
                     
-    box_dict
+    print(box_dict)
                      
     
     """
