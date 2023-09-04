@@ -1,7 +1,6 @@
 if __name__ == "__main__":
     
     # boj.kr/17136
-    input = open("data/boj_17136.txt", "r").readline
     arr = [input().split() for _ in range(10)]
     dp = [[[0, i, j, False] for j in range(len(arr[0]))] for i in range(10)]
 
