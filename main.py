@@ -1,6 +1,7 @@
 if __name__ == "__main__":
     
     # boj.kr/17136
+    input = open("data/boj_17136.txt", "r").readline
     arr = [input().split() for _ in range(10)]
     dp = [[[0, i, j, False] for j in range(len(arr[0]))] for i in range(10)]
 
@@ -28,12 +29,16 @@ if __name__ == "__main__":
                             if not dp[i-k][j-l][3]:
                                 sum += 1
                     print(f"(i, j) : ({i}, {j}),  sum : {sum}")
+                    
+                    
                     if sum == size ** 2:
-                        dp[i][j][3] = True
+                        dp[i][j][3] = True                                             
                         for k in range(size-1, -1, -1):
                             for l in range(size-1, -1, -1):
                                 if not(k==0 and l==0):
                                     dp[i-k][j-l][0] = 0
+                    else:
+                        dp[i][j][0] -= 1                        
         size -= 1  
 
 
@@ -46,7 +51,7 @@ if __name__ == "__main__":
                 else:
                     box_dict[dp[i][j][0]] += 1
                     
-    print(box_dict)         
+    print(box_dict)       
                      
     
     """
