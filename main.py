@@ -61,7 +61,8 @@ if __name__ == "__main__":
     elif not box_dict:
         sum = 0
     else:
-        sum = -1       
+        sum = -1 
+    print(sum)      
                      
     
     """
