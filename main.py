@@ -50,7 +50,18 @@ if __name__ == "__main__":
                 else:
                     box_dict[dp[i][j][0]] += 1
                     
-    print(box_dict)       
+    print(box_dict)
+    
+    sum = 0
+    if any([x <= 5 for x in box_dict.values()]):
+        for i in range(len(dp)):
+            for j in range(len(dp[i])):
+                if dp[i][j][0] != 0:
+                    sum += 1
+    elif not box_dict:
+        sum = 0
+    else:
+        sum = -1       
                      
     
     """
